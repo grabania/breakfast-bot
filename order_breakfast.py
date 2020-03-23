@@ -22,14 +22,17 @@
 
 import time
 
-print("Hello! I am Bob, the Breakfast Bot.")
-time.sleep(2)
-print("Today we have two breakfasts available.")
-time.sleep(2)
-print("The first is waffles with strawberries and whipped cream.")
-time.sleep(2)
-print("The second is sweet potato pancakes with butter and syrup.")
-time.sleep(2)
+
+def print_pause(message_to_print):
+    print(message_to_print)
+    time.sleep(2)
+
+
+print_pause("Hello! I am Bob, the Breakfast Bot.")
+print_pause("Today we have two breakfasts available.")
+print_pause("The first is waffles with strawberries and whipped cream.")
+print_pause("The second is sweet potato pancakes with butter and syrup.")
+
 
 response = ""
 while response != "waffles" and response != "pancakes":
