@@ -1,25 +1,3 @@
-# other way:
-# response = input(
-#     "Please place your order. Woild you like waffles or pancakes?\n").lower()
-# if response == "waffles":
-#     print("Waffles it is!")
-# elif response == "pancakes":
-#     print("Pancakes it is!")
-
-# or:
-# while True:
-#     response = input(
-#         "Please place your order. Would you like waffles or pancakes?\n").lower()
-#     if response == "waffles":
-#         print("Waffles it is!")
-#         break
-#     elif response == "pancakes":
-#         print("Pancakes it is!")
-#         break
-#     else:
-#         print("Sorry, I don't understand.")
-
-
 import time
 
 
@@ -28,26 +6,51 @@ def print_pause(message_to_print):
     time.sleep(2)
 
 
-print_pause("Hello! I am Bob, the Breakfast Bot.")
-print_pause("Today we have two breakfasts available.")
-print_pause("The first is waffles with strawberries and whipped cream.")
-print_pause("The second is sweet potato pancakes with butter and syrup.")
+def valid_input(prompt, option1, option2):
+    while True:
+        response = input(prompt).lower()
+        if option1 in response:
+            break
+        elif option2 in response:
+            break
+        else:
+            print_pause("Sorry, I don't understand.")
+    return response
 
 
-response = ""
-while response != "waffles" and response != "pancakes":
-    response = input(
-        "Please place your order. Would you like waffles or pancakes?\n")
-    if "waffles" in response.lower():
-        print("Waffles it is!")
-        time.sleep(2)
-        break
-    elif "pancakes" in response.lower():
-        print("Pancakes it is!")
-        time.sleep(2)
-        break
-    else:
-        print("Sorry, I don't understand.")
-        time.sleep(2)
-print("Your order will be ready shortly.")
-time.sleep(2)
+def intro():
+    print_pause("Hello! I am Bob, the Breakfast Bot.")
+    print_pause("Today we have two breakfasts available.")
+    print_pause("The first is waffles with strawberries and whipped cream.")
+    print_pause("The second is sweet potato pancakes with butter and syrup.")
+
+
+def get_order():
+    response = valid_input("Please place your order. "
+                           "Would you like waffles or pancakes?\n",
+                           "waffles", "pancakes")
+    if "waffles" in response:
+        print_pause("Waffles it is!")
+    elif "pancakes" in response:
+        print_pause("Pancakes it is!")
+    print_pause("Your order will be ready shortly.")
+    order_again()
+
+
+def order_again():
+    response = valid_input("Would you like to place another order? "
+                           "Please say 'yes' or 'no'.\n",
+                           "yes", "no")
+    if "no" in response:
+        print_pause("OK, goodbye!")
+    elif "yes" in response:
+        print_pause("Very good, I'm happy to take another order.")
+        get_order()
+
+
+def order_breakfast():
+    intro()
+    get_order()
+
+
+order_breakfast()
